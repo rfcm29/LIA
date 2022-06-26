@@ -26,25 +26,6 @@ class CheckDates
      */
     public function handle($request, Closure $next)
     {
-        $reservas = Reserva::checkdates();
-        $funcionarios = User::GestoresDeReservas();
-
-        foreach ($reservas as $reserva) {
-            $userReserva = User::findOrFail($reserva->user_id);
-
-            Mail::to($userReserva->email)
-                ->send(new Reserva_Atraso($reserva));
-
-            foreach ($funcionarios as $value) {
-
-                foreach ($value as $user) {
-                    Mail::to($user->email)
-                        ->send(new NovosAtrasosToFuncionarios($reserva, $userReserva));
-                    sleep(2);
-                }
-            }
-        }
-
-        return $next($request);
+        
     }
 }
