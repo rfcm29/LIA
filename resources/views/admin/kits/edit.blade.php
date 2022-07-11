@@ -86,16 +86,10 @@ $i = 0
                         <td>
                             <select name="kits[]" class="form-control" id="kits" multiple>
                                 @foreach ($kits as $formKit)
-                                    @if($kit->kits)
-                                        @foreach ($kit->kits as $item)
-                                            @if ($item->id == $formKit->id)
-                                                <option value="{{ $formKit->id }}" selected>{{ $formKit->lia_code }} - {{ $formKit->description }}</option>
-                                            @else
-                                                <option value="{{ $formKit->id}}">{{ $formKit->lia_code }} - {{ $formKit->description }}</option>
-                                            @endif
-                                        @endforeach
-                                    @else
+                                    @if (old('kits') != null)
                                         <option value="{{ $formKit->id }}" {{ (collect(old('kits'))->contains($formKit->id)) ? 'selected':'' }}>{{ $formKit->lia_code }} - {{ $formKit->description }}</option>
+                                    @else
+                                        <option value="{{ $formKit->id }}" {{ $kit->kits->contains($formKit) ? 'selected' : ''}}>{{ $formKit->lia_code }} - {{ $formKit->description }}</option>
                                     @endif
                                 @endforeach
                             </select>

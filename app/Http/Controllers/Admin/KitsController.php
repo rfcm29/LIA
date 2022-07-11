@@ -8,9 +8,7 @@ use App\Models\Kit;
 use App\Models\KitCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Psy\Readline\Hoa\Console;
 use RealRashid\SweetAlert\Facades\Alert;
-use Symfony\Component\Debug\Debug;
 
 class KitsController extends Controller
 {
@@ -120,7 +118,7 @@ class KitsController extends Controller
             
             foreach($request->itens as $key => $itemInfo){
                 foreach($items as $item){
-                    if($kit->id == $key){
+                    if($item->id == $key){
                         $item->update([
                             'description' => $itemInfo['description'],
                             'model' => $itemInfo['model'],
@@ -128,8 +126,8 @@ class KitsController extends Controller
                             'ipvc_ref' => $itemInfo['ipvc_ref']
                         ]);
                         $item->save();
-                        $items->pull($item);
-                        $request->itens->forget($key);  
+                        $items->pull($item->id);
+                        unset($request->itens,$key);
                     }
                 }
             }
@@ -152,25 +150,16 @@ class KitsController extends Controller
         }
 
         if($request->kits){
-            foreach($request->kits as $kitID){
-                if($kits){
-                    foreach($kits as $item){
-                        if($item->id == $kitID){
-                            $kits->pull($item);
-                            $request->kits->pull($kitID);
-                        }
-                    }
-                    foreach($kits as $item){
-                        $item->kit_id = null;
-                        $item->save();
-                    }
-                } else {
-                    $data = Kit::where('id', $kitID)->first();
-                    $data->id_kit = $id;
-                    $data->save();
-                }
+            foreach($kits as $item){
+                $item->kit_id = null;
+                $item->save();
             }
-        }else{
+            foreach($request->kits as $kitID){
+                $data = Kit::where('id', $kitID)->first();
+                $data->kit_id = $id;
+                $data->save();
+            }
+        }else {
             foreach($kits as $item){
                 $item->kit_id = null;
                 $item->save();
@@ -188,7 +177,7 @@ class KitsController extends Controller
 
         $kit->save();
 
-        return view('admin.kits.show', ['kit' => $kit]);
+        return redirect(route('kits.show', $kit->id));
     }
 
     public function destroy(){
