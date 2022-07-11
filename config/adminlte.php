@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Lia',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Lia</b>LTE',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -127,9 +127,9 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-blue elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-blue navbar-dark',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -238,85 +238,65 @@ return [
 
         // Sidebar items:
         [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Dashboard',
+            'url'  => 'admin/home',
+            'icon' => 'fas fa-fw fa-home',
         ],
+        ['header' => 'Kits e Reservas'],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text'    => 'Kits',
+            'icon'    => 'fas fa-fw fa-th',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Lista de Kits',
+                    'url'  => '/admin/kits',
+                    'active' => ['regex:@^admin/kits/[0-9]+$@']
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text' => 'Criar novo Kit',
+                    'url'  => '/admin/kits/create'
+                ]
+            ]
+        ],
+        [
+            'text'    => 'Reservas',
+            'icon'    => 'fas fa-fw fa-shopping-cart',
+            'submenu' => [
+                [
+                    'text' => 'Todas as reservas',
+                    'url'  => '/admin/reserves/',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Resevas pendentes',
+                    'url'  => '/admin/reserves/pending'
+                ],
+                [
+                    'text' => 'Reservas em atraso',
+                    'url'  => '/admin/reserves/delayed',
                 ],
             ],
         ],
-        ['header' => 'labels'],
+        ['header' => 'Espaço Lia'],
         [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
+            'text' => 'Espaço Lia',
+            'icon' => 'fas fa-fw fa-laptop',
+            'url'  => '#',
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+            'text' => 'Reservas',
+            'icon' => 'fas fa-fw fa-desktop',
+            'url'  => '#',
+        ],
+        ['header' => 'Outros'],
+        [
+            'text' => 'Utilizadores',
+            'icon' => 'fas fa-fw fa-user',
+            'url'  => '#',
         ],
         [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
+            'text' => 'Centros de Custo',
+            'icon' => 'fa fa-fw fa-euro-sign',
+            'url'  => '#',
         ],
     ],
 
@@ -376,17 +356,22 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
+                    'asset' => true,
+                    'location' => 'vendor/select2/js/select2.full.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
+                    'asset' => true,
+                    'location' => 'vendor/select2/css/select2.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css',
                 ],
             ],
         ],
@@ -401,7 +386,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

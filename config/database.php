@@ -52,7 +52,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            //'url' => env('DATABASE_URL', getenv("JAWSDB_MARIA_URL")),
+            'url' => env('DATABASE_URL', getenv("JAWSDB_MARIA_URL")),
             'host' => env('DB_HOST', ""),
             'database' => env('DB_DATABASE', ""),
             'username' => env('DB_USERNAME', ""),

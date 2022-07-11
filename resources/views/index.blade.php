@@ -1,19 +1,23 @@
-@extends('adminlte::page')
+@extends('adminlte::master')
 
-@section('title', 'Dashboard')
+@section('adminlte_css_pre')
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+@endsection
 
-@section('content_header')
-    <h1>Dashboard</h1>
+@section('body')
+    @include('layouts.navbar')
+    <div class="wrapper">
+        <div class="{{ config('adminlte.classes_content') ?: 'container' }}">
+            @yield('content')
+        </div>
+    </div>
+@endsection
+
+@section('adminlte_js')
+    <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script> 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <x-livewire-alert::flash />
+
 @stop
 
-@section('content')
-    <p>Welcome to this beautiful admin panel.</p>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop

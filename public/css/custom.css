@@ -1,0 +1,47 @@
+.categoria-container{
+  position: relative;
+  width: 100%;
+  border:#000 solid 1px;
+  padding: 8px;
+}
+
+.categoria-container img{
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.nome{
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.nome-texto a{
+  color: black;
+  font-size: 25px;
+  padding: 16px 32px;
+  text-decoration: solid;
+}
+
+
+.categoria-container:hover img{
+  opacity: 0.2;
+}
+
+.categoria-container:hover .nome{
+  opacity: 1;
+}
+
+.wrapper{
+  padding-top: 3%;
+  }
+  
