@@ -14,10 +14,11 @@ class KitsController extends Controller
 {
     public function index(){
         if(request('search')){
-            $kits = Kit::where('description', 'LIKE', '%'.request('search').'%')
+            $kits = Kit::where('kit_state_id', '!=', 3)
+                ->where('description', 'LIKE', '%'.request('search').'%')
                 ->orWhere('lia_code', 'LIKE', '%'.request('search').'%')->get();
         } else{
-            $kits = Kit::all();
+            $kits = Kit::where('kit_state_id', '!=', 3)->get();
         }
         
         return view('admin.kits.index', ['kits' => $kits]);
@@ -180,7 +181,16 @@ class KitsController extends Controller
         return redirect(route('kits.show', $kit->id));
     }
 
-    public function destroy(){
+    public function destroy($id){
+        $kit = Kit::find($id);
+        foreach($kit->kits as $item){
+            $item->kit_id = null;
+            $item->save();
+        }
+        $kit->lia_code = null;
+        $kit->kit_state_id = 3;
+        $kit->save();
 
+        return redirect('/admin/kits');
     }
 }
