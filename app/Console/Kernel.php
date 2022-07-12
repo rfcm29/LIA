@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Reserve;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function(){
+            Reserve::where('end_date', '<', now()->toDateString())->update(['reserve_state_id' => '4']);
+        })->daily();
     }
 
     /**

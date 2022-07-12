@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\KitsController;
+use App\Http\Controllers\Admin\ReserveController as AdminReserveController;
 use App\Http\Controllers\User\KitsController as UserKitsController;
 use App\Http\Controllers\User\ReserveController;
 use Illuminate\Support\Facades\Route;
@@ -39,10 +40,10 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('/reserves')->group(function () {
-            Route::livewire('/', All::class);
-            Route::livewire('/pending', Pending::class);
-            Route::livewire('/delayed', Delayed::class);
-            Route::livewire('/{id}', Show::class);
+            Route::get('/', [AdminReserveController::class, 'all']);
+            Route::get('/pending', [AdminReserveController::class, 'pending']);
+            Route::get('/delayed', [AdminReserveController::class, 'delayed']);
+            Route::livewire('/{id}', [AdminReserveController::class, 'show'])->name('reserves.show');
             
         });
     });
