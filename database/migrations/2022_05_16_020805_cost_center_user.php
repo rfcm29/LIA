@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CentroCustos extends Migration
+class CostCenterUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,11 @@ class CentroCustos extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('cost_center_user', function(Blueprint $table){
+            $table->id();
+            $table->unsignedBigInteger('cost_center_id');
+            $table->unsignedBigInteger('user_id');
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class CentroCustos extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('cost_center_user');
     }
 }

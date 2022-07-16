@@ -31,4 +31,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    /**
+     * Get all of the reserves for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reserves(): HasMany
+    {
+        return $this->hasMany(Reserve::class);
+    }
+
+    /**
+     * The permissions that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function permissions(): BelongsToMany
+    {
+        return $this->belongsToMany(Permission::class, 'role_user_table', 'user_id', 'role_id');
+    }
 }

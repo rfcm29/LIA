@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Kit extends Migration
+class CreatePermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class Kit extends Migration
      */
     public function up()
     {
-        Schema::create('kits', function (Blueprint $table) {
+        Schema::create('permission', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('id_ipvc')->nullable();
-            $table->string('name');
-            $table->unsignedInteger('id_atributos');
-            $table->unsignedInteger('categoria_id');
-            $table->string('observacoes')->nullable();
-            //$table->decimal('preco');
+            $table->string('description');
+            $table->timestamps();
         });
     }
 
@@ -31,6 +27,6 @@ class Kit extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('permission');
     }
 }

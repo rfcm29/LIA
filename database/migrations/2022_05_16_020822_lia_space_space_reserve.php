@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ItemKit extends Migration
+class LiaSpaceSpaceReserve extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class ItemKit extends Migration
      */
     public function up()
     {
-        Schema::create('item_kits', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedInteger('item_id');
-            $table->unsignedInteger('kit_id');
+        Schema::create('lia_space_space_reserve', function(Blueprint $table){
+            $table->id();
+            $table->unsignedBigInteger('lia_space_id');
+            $table->unsignedBigInteger('space_reserve_id');
         });
     }
 
@@ -27,6 +27,6 @@ class ItemKit extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('lia_space_space_reserve');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Mensagem extends Migration
+class CreateKitCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,11 @@ class Mensagem extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('kit_categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('description');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class Mensagem extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('kit_categories');
     }
 }

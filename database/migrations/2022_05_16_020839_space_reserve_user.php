@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ReservaLinhas extends Migration
+class SpaceReserveUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class ReservaLinhas extends Migration
      */
     public function up()
     {
-        Schema::create('reserva_linhas', function (Blueprint $table) {
-            $table->integer('reserva_id');
-            $table->unsignedBigInteger('item_id')->nullable();
-            $table->unsignedBigInteger('kit_id')->nullable();
-            $table->string('type');
+        Schema::create('space_reserve_user', function(Blueprint $table){
+            $table->id();
+            $table->unsignedBigInteger('space_reserve_id');
+            $table->unsignedBigInteger('user_id');
         });
     }
 
@@ -28,6 +27,6 @@ class ReservaLinhas extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('space_reserve_user');
     }
 }

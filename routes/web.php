@@ -43,8 +43,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [AdminReserveController::class, 'all']);
             Route::get('/pending', [AdminReserveController::class, 'pending']);
             Route::get('/delayed', [AdminReserveController::class, 'delayed']);
-            Route::livewire('/{id}', [AdminReserveController::class, 'show'])->name('reserves.show');
-            
+            Route::get('/{id}', [AdminReserveController::class, 'show'])->name('reserves.show');
+            Route::get('/download/{id}', [AdminReserveController::class, 'PDFDownload'])->name('pdf-download');
+            Route::post('/{id}/autorize', [AdminReserveController::class, 'autorize'])->name('reserve.autorize');
+            Route::post('/{id}/decline', [AdminReserveController::class, 'decline'])->name('reserve.decline');
         });
     });
 

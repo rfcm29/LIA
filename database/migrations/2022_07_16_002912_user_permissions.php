@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CentrosCustosLinha extends Migration
+class UserPermissions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CentrosCustosLinha extends Migration
      */
     public function up()
     {
-        Schema::create('centros_custos_linhas', function (Blueprint $table) {
-            
+        Schema::create('user_permissions', function(Blueprint $table){
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('permission_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('centro_id');
-            
-            $table->boolean('is_gestor');
-
+            $table->foreign('permission_id')->references('id')->on('permission');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('centro_id')->references('id')->on('centros_custos');
         });
     }
 
