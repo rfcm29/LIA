@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\User;
-use App\CarrinhoCompras;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -53,21 +52,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'numero_mecanografico' => ['required', 'integer','unique:users'],
-            'numero_telemovel' => ['required', 'integer','unique:users'],
-            
-        ],$messages = [
-            'required'    => 'O :attribute é obrigatório',
-            'string'    => 'O :attribute tem de ser texto',
-            'email' => 'O :attribute tem de ser texto',
-            'max'    => 'O :attribute tem de ser menor que :max.',
-            'min'    => 'O :attribute tem que ter mais de :min caracteres.',
-            'between'    => 'O :attribute tem de ser entre :min - :max de comprimento',
-            'email' => 'O :attribute tem de ser um email',
-            'integer'    => 'O :attribute tem de ser um numero',
-            'unique'    => 'O :attribute já existe',
-            
-            
         ]);
     }
 
@@ -79,23 +63,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user= User::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'grupo_id'=>2,
-            'numero_mecanografico'=>$data['numero_mecanografico'],
-            'numero_telemovel'=>$data['numero_telemovel']
+            'user_type_id' => '6',
+            'user_status_id' => '1'
         ]);
-        $user->save();
-
-        CarrinhoCompras::create([
-            'user_id'=> $user->id,
-            'created_at'=> now(),
-            'updated_at'=> now(),
-        ]);
-
-
-        return $user;
     }
 }

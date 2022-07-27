@@ -13,8 +13,10 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\KitsController;
+use App\Http\Controllers\Admin\LiaSpaceController as AdminLiaSpaceController;
 use App\Http\Controllers\Admin\ReserveController as AdminReserveController;
 use App\Http\Controllers\User\KitsController as UserKitsController;
+use App\Http\Controllers\User\LiaSpaceController;
 use App\Http\Controllers\User\ReserveController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +50,16 @@ Route::middleware('auth')->group(function () {
             Route::post('/{id}/autorize', [AdminReserveController::class, 'autorize'])->name('reserve.autorize');
             Route::post('/{id}/decline', [AdminReserveController::class, 'decline'])->name('reserve.decline');
         });
+
+        Route::prefix('/lia-space')->group(function(){
+            Route::get('/', [AdminLiaSpaceController::class, 'index']);
+            Route::post('/', [AdminLiaSpaceController::class, 'getSpace']);
+            Route::get('/create/{id}', [AdminLiaSpaceController::class, 'create']);
+            Route::post('/{id}', [AdminLiaSpaceController::class, 'store'])->name('space.store');
+            Route::get('/{id}/edit', [AdminLiaSpaceController::class, 'edit']);
+            Route::put('/{id}', [AdminLiaSpaceController::class, 'update']);
+            Route::delete('/{id}', [AdminLiaSpaceController::class, 'delete']);
+        });
     });
 
     Route::prefix('reserve')->group(function(){
@@ -58,6 +70,15 @@ Route::middleware('auth')->group(function () {
         Route::post('/remove-kit/{id}', [ReserveController::class, 'removeKit'])->name('kit.remove');
         Route::post('/reserve-cancel', [ReserveController::class, 'cancelReserve'])->name('reserve.cancel');
         Route::post('/reserve-confirm', [ReserveController::class, 'confirmReserve'])->name('reserve.confirm');
+    });
+
+    Route::prefix('lia-space')->group(function(){
+        Route::get('/', [LiaSpaceController::class, 'index']);
+        Route::post('/', [LiaSpaceController::class, 'getSpace']);
+        Route::post('/availability', [LiaSpaceController::class, 'checkAvailability']);
+        Route::get('/reserve', [LiaSpaceController::class, 'reserve']);
+        Route::post('/reserve/{id}', [LiaSpaceController::class, 'createReserve'])->name('space.reserve');
+        
     });
 });
 

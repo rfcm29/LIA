@@ -27,7 +27,7 @@
                     @endif
                     @if (Auth::user()->user_type == 2 || /*Auth::user()->isAdmin()*/true)
                         <li class="nav-item bg-blue">
-                            <a href="/reservarEspaco" class="nav-link">Espaço.Lia</a>
+                            <a href="/lia-space" class="nav-link">Espaço.Lia</a>
                         </li>
                     @endif
 

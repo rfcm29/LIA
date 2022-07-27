@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UserPermissions extends Migration
+class SpaceReserveColumns extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class UserPermissions extends Migration
      */
     public function up()
     {
-        Schema::create('user_permissions', function(Blueprint $table){
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('permission_id');
+        Schema::table('space_reserves', function(Blueprint $table){
             $table->unsignedBigInteger('user_id');
-            $table->foreign('permission_id')->references('id')->on('permission');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('occupant_id');
+            $table->foreign('occupant_id')->references('id')->on('users');
         });
     }
 
@@ -29,6 +28,6 @@ class UserPermissions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_permissions');
+        //
     }
 }
