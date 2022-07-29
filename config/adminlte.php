@@ -46,11 +46,11 @@ return [
     */
 
     'logo' => '<b>Lia</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img' => 'images/default.png',
+    'logo_img_class' => 'brand-image img-square',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' => 'LIA',
 
     /*
     |--------------------------------------------------------------------------
@@ -276,6 +276,11 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'Categorias',
+            'icon' => 'fas fa-fw fa-folder',
+            'url'  => '/admin/categories',
+        ],
         ['header' => 'Espaço Lia'],
         [
             'text' => 'Espaço Lia',
@@ -291,7 +296,7 @@ return [
         [
             'text' => 'Utilizadores',
             'icon' => 'fas fa-fw fa-user',
-            'url'  => '#',
+            'url'  => '/admin/users',
         ],
         [
             'text' => 'Centros de Custo',

@@ -227,7 +227,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
-        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class
     ],
 
 ];

@@ -15,6 +15,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\KitsController;
 use App\Http\Controllers\Admin\LiaSpaceController as AdminLiaSpaceController;
 use App\Http\Controllers\Admin\ReserveController as AdminReserveController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\KitsController as UserKitsController;
 use App\Http\Controllers\User\LiaSpaceController;
 use App\Http\Controllers\User\ReserveController;
@@ -38,7 +40,6 @@ Route::middleware('auth')->group(function () {
             Route::get('/{id}/edit', [KitsController::class, 'edit'])->name('kits.edit');
             Route::put('/{id}', [KitsController::class, 'update'])->name('kits.update');
             Route::delete('{id}', [KitsController::class, 'destroy'])->name('kits.destroy');
-
         });
 
         Route::prefix('/reserves')->group(function () {
@@ -51,6 +52,12 @@ Route::middleware('auth')->group(function () {
             Route::post('/{id}/decline', [AdminReserveController::class, 'decline'])->name('reserve.decline');
         });
 
+        Route::prefix('categories')->group(function(){
+            Route::get('/', [CategoryController::class, 'index']);
+            Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+            Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
+        });
+
         Route::prefix('/lia-space')->group(function(){
             Route::get('/', [AdminLiaSpaceController::class, 'index']);
             Route::post('/', [AdminLiaSpaceController::class, 'getSpace']);
@@ -59,6 +66,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/{id}/edit', [AdminLiaSpaceController::class, 'edit']);
             Route::put('/{id}', [AdminLiaSpaceController::class, 'update']);
             Route::delete('/{id}', [AdminLiaSpaceController::class, 'delete']);
+        });
+
+        Route::prefix('users')->group(function(){
+            Route::get('/', [UserController::class, 'index']);
+            Route::get('/{id}', [UserController::class, 'show'])->name('user.show');
         });
     });
 
@@ -84,7 +96,3 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/kit/{id}', [UserKitsController::class, 'show']);
 Route::get('/categoria/{id}', [UserKitsController::class, 'index']);
-
-Route::get('teste', function () {
-    return session()->all();
-});

@@ -35,7 +35,8 @@ class KitsController extends Controller
         $request->validate([
             'description' => 'required',
             'lia_code' => 'required|unique:kits,lia_code',
-            'price' => 'required'
+            'price' => 'required',
+            'image' => 'required'
         ],
         [
             'description.required' => 'O kit deve ter uma descrição',
@@ -49,6 +50,11 @@ class KitsController extends Controller
                 'itens.*.description' => 'required'
             ]);
         }
+
+        $imagePath = $request->file('image');
+        $imageName = time() . '.' . $imagePath->getClientOriginalExtension();
+    
+        $path = $request->file('image')->storeAs('images/kits', $imageName, 'public');
         
         $parentKit = Kit::create([
             'description' => $request->description,
@@ -56,7 +62,8 @@ class KitsController extends Controller
             'price' => $request->price,
             'ipvc_ref' => $request->ipvc_ref,
             'kit_category_id' => $request->category,
-            'kit_state_id' => 1
+            'kit_state_id' => 1,
+            'image' => $path
         ]);
 
         if($request->itens){

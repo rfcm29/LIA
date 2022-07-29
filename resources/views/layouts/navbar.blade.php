@@ -52,24 +52,11 @@
                         <img src="{{url('/images/logo_1.png')}}" width="90">
                     </a>
                 </li>
-                <li style="font-size: 1.5rem" class="nav-item">
-                    <a class="nav-link" href="/categoria/1">CÂMARAS</a>
-                </li>
-                <li style="font-size: 1.5rem" class="nav-item">
-                    <a class="nav-link" href="/categoria/2">LENTES</a>
-                </li>
-                <li style="font-size: 1.5rem" class="nav-item">
-                    <a class="nav-link" href="/categoria/3">ILUMINAÇÃO</a>
-                </li>
-                <li style="font-size: 1.5rem" class="nav-item">
-                    <a class="nav-link" href="/categoria/4">AUDIO</a>
-                </li>
-                <li style="font-size: 1.5rem" class="nav-item">
-                    <a class="nav-link" href="/categoria/5">TRIPÉS</a>
-                </li>
-                <li style="font-size: 1.5rem" class="nav-item">
-                    <a class="nav-link" href="/categoria/6">ACESSÓRIOS</a>
-                </li>
+                @foreach (session()->get('categories') as $category)
+                    <li style="font-size: 1.5rem" class="nav-item">
+                        <a class="nav-link" href="/categoria/{{ $category->id }}">{{ $category->description }}</a>
+                    </li>
+                @endforeach
                 <li style="font-size: 1.5rem" class="nav-item">
                     <a class="nav-link" href="{{-- route('contactos') --}}">CONTACTOS</a>
                 </li>

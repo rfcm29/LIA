@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="d-flex flex-column">
-        <form action="{{ route('kits.store') }}" method="POST">
+        <form action="{{ route('kits.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
             @method('POST')
             <div class="form-group">
@@ -38,6 +38,10 @@
                 <label for="preco">Preço</label>
                 <input type="text" name="price" id="preco" class="form-control" value="{{ old('price') }}">
                 <span style="color:red">{{$errors->first('price')}}</span>
+            </div>
+            <div class="form-group">
+                <label for="">Imagem para Kit</label>
+                <input type="file" class="form-control-file" name="image" id="image">
             </div>
 
             <h1>Itens</h1>

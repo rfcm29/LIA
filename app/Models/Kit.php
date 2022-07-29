@@ -18,7 +18,8 @@ class Kit extends Model
         'price',
         'kit_id',
         'kit_category_id',
-        'kit_state_id'
+        'kit_state_id',
+        'image'
     ];
 
     /**

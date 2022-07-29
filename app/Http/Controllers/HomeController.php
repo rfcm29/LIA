@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KitCategory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,7 +16,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.menu');
+        session()->put('categories', KitCategory::all());
+        return view('layouts.menu', ['categories' => KitCategory::all()]);
     }
 
     public function adminIndex(){

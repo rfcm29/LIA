@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable
 {
@@ -51,6 +52,26 @@ class User extends Authenticatable
      */
     public function permissions(): BelongsToMany
     {
-        return $this->belongsToMany(Permission::class, 'role_user_table', 'user_id', 'role_id');
+        return $this->belongsToMany(Permission::class);
+    }
+
+    /**
+     * Get the userType that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function userType(): BelongsTo
+    {
+        return $this->belongsTo(UserType::class);
+    }
+
+    /**
+     * Get the userStatus that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function userStatus(): BelongsTo
+    {
+        return $this->belongsTo(UserStatus::class);
     }
 }
